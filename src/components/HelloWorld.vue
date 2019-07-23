@@ -32,7 +32,15 @@
     <h3>6.Vuex</h3>
     <p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化.
 Vuex 解决了多个视图依赖于同一状态和来自不同视图的行为需要变更同一状态的问题，将开发者的精力聚焦于数据的更新而不是数据在组件之间的传递上</p>
-    <p>太多咱（暂）不想写</p>
+    <io></io>
+    <k></k>
+    <p>getters:过滤数组 《10：{{filter}}</p>
+    <div>
+      modules--姓名:{{useName}}
+      <!-- 增加h2 展示 localJobTitle -->
+      <h2>{{localJobTitle}}</h2>
+      <button @click="changeName"> change to json</button>
+    </div>
     <br>
     <br>
     <br>
@@ -69,9 +77,12 @@ import d from "@/components/children/d";
 import e from "@/components/children/e";
 import f from "@/components/children/f";
 import g from "@/components/children/g";
+import i from "@/components/children/i";
+import k from "@/components/children/k";
+import {mapActions, mapState,mapGetters} from "vuex";
 export default {
   name: "HelloWorld",
-  components: { comArticle: a, ComA: b, comB: c, d, e, f ,gs:g},
+  components: { comArticle: a, ComA: b, comB: c, d, e, f ,gs:g,io:i,k},
   data() {
     return {
       articleList: ["红楼梦", "西游记", "三国演义"],
@@ -93,7 +104,19 @@ export default {
     console.log(namec.name); // Vue.js
     namec.sayHello(); // hello
   },
+  computed: {
+    
+    useName: function(){
+      return this.$store.state.login.useName
+    },
+    filter: function(){
+      return this.$store.getters.filter
+    }
+  },
   methods: {
+    changeName(){
+      this.$store.dispatch("changeName","Jasion")
+    },
     onEmitIndex(idx, demo) {
       console.log(demo);
       this.currentIndex = idx;
